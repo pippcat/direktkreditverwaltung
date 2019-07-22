@@ -55,7 +55,7 @@
 \begin{footnotesize}
 \begin{tabularx}{\textwidth}{XXX} 
     \ppgray{Hausprojekt Bank}                             & \ppgray{Geschäftsführung}                 & \ppgray{Registergericht: XXX} \\ 
-    \ppgray{BLZ Bank Konto-Nr.: Bank}   & \ppgray{Name 1, Name 2} & \ppgray{Steuernummer: XXXXX}
+    \ppgray{BIC Bank Konto-Nr.: Bank}   & \ppgray{Name 1, Name 2} & \ppgray{Steuernummer: XXXXX}
 \end{tabularx} 
 \end{footnotesize}
 }
