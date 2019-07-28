@@ -1,11 +1,9 @@
 
 # Direktkreditverwaltung
-[![Build Status](https://travis-ci.org/pamuche/direktkreditverwaltung.svg?branch=master)](https://travis-ci.org/pamuche/direktkreditverwaltung)
-[![Stories in Ready](https://badge.waffle.io/pamuche/direktkreditverwaltung.png?label=ready&title=Ready)](https://waffle.io/pamuche/direktkreditverwaltung)
 
 Nach Erfordernissen eines Mietshäuser Syndikat Projekts.
 
-## General
+## Allgemein
 
 Zinsberechnung nach der "Deutschen Methode" 30/360 (mit der days360-Methode nach "The European Method (30E/360)"). Siehe http://de.wikipedia.org/wiki/Zinssatz#Berechnungsmethoden und http://en.wikipedia.org/wiki/360-day_calendar.
 
@@ -32,7 +30,7 @@ Verwaltet:
 
 Import von:
 
-* Kontakten 
+* Kontakten
     * `$ rake import:contacts[/path/to/csv_file.csv]`
 * Direktkreditverträgen
     * `$ rake import:contracts[/path/to/csv_file.csv]`
@@ -46,23 +44,23 @@ Import von:
 
 * ist verfügbar für die Zinsübersicht, Zinsbriefe und Dankesbriefe
 * kann mit Bildern und Textsnippets im Verzeichnis custom angepasst werden
-* die &lt;Dateiname&gt;_template-Vorlagen in diesem Verzeichnis müssen in eine Datei &lt;Dateiname&gt; kopiert werden und dann editiert.
+* die &lt;Dateiname&gt;\_template-Vorlagen in diesem Verzeichnis müssen in eine Datei &lt;Dateiname&gt; kopiert werden und dann editiert.
 
 #### latex-Ausgabe
 
 * z.B. die Zinsauswertung lässt sich im latex-Format ausgeben. Diese kann dann gespeichert, modifiziert und mit latex, dvipdfm, ... weiter verarbeitet werden
 * die latex-Ausgabe ist der pdf-Ausgabe vorzuziehen, wenn die Möglichkeit der latex-Datei-Manipulation vor der pdf-Erstellung nötig ist
-* Templates für die Zinsbriefe befinden sich in /app/views/layouts und /app/views/contracts . Sie enden auf "_template". Kopiere die _template-Dateien in Dateien mit gleichem Namen jedoch ohne "_template" und ändere die die Dateien wo nötig.
-* Parameter für dvipdfm: -p a4 (Papiergröße), -l (Landscape mode für Dankesbriefe) 
+* Templates für die Zinsbriefe befinden sich in /app/views/layouts und /app/views/contracts . Sie enden auf "\_template". Kopiere die \_template-Dateien in Dateien mit gleichem Namen jedoch ohne "\_template" und ändere die die Dateien wo nötig.
+* Parameter für dvipdfm: -p a4 (Papiergröße), -l (Landscape mode für Dankesbriefe)
 
-## Configuration
+## Konfiguration
 
-* The type of contract number is `integer` by default. If you need it to be a `string` (e.g. like '2-06-001') edit `config/settings.yml` accordingly:
+* Der Standardtyp der Verträge ist "Integer". Falls ein "String" benötigt wird (z.B. bei Vertragsnamen wie "2-05-001"), muss die config/settings.yml angepasst werden:
 ```
 contract_number_type: "string" # one of: "string" | "integer", defaults to integer
 ```
 
-## Geplant sind 
+## Geplant sind
 
 * Graphen
 
@@ -70,41 +68,21 @@ contract_number_type: "string" # one of: "string" | "integer", defaults to integ
 
 * Löschen von Verträgen sollte Vertragsversionen, Buchungen, ... mitlöschen
 
-## Development
+## Setup
 
-### Prerequisits
+### Voraussetzungen
 
-* postgres (install e.g. on osx via homebrew: `$ brew install postgresql`; linux `apt-get install postgresql libpq-dev`)
-* you may want to use rvm (https://rvm.io) to manage your ruby versions and gemset
+* docker
+* docker-compose
 
 ### Installation
 
-Prerequisits:
+* 'config/database.yml_template_sqlite3' und 'config/settings.yml_template' anpassen
+* 'docker-compose up'
 
-* postgresql (e.g. via brew)
+### Backup
 
-Setup repo:
-
-1. git clone repo and cd into repo
-2. check ruby version and gemset you want to use, e.g.
-    * create and edit `.ruby-version` and `.ruby-gemset`
-    * `$ cd .`
-3. `$ gem install bundler`
-4. `$ bundle install` (you may `$ bundle update` to avoid problems installing `libv8`)
-
-5. create database config, e.g. `$ cp config/database.yml_template_<db_of_your_choice> config/database.yml` and edit according to your needs
-6. setup db: `$ rake db:setup`
-7. migrate db: `$ rake db:migrate`
-
-8. start the app: `$ rails server` -> the app is now available on http://localhost:3000
-
-9. optional: `$ cp config/settings.yml_template config/settings.yml` and edit according to your needs
-
-10. optional - seed your db:
-    * `$ cp db/seeds.rb_template db/seeds.rb` and edit according to your needs
-    * `$ rake db:seed` to load the content into db
-
-
+* ist noch nicht implementiert, die 'db/*.sqlite3'-Dateien können aber einfach händisch gesichert werden.
 
 ### Tests
 
@@ -116,3 +94,7 @@ Setup repo:
 ### API docs
 
 * create via: `$ rake doc:app`
+
+### Laufenden Container betreten
+
+* 'docker-compose exec web bash'
