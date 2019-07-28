@@ -8,7 +8,7 @@ ENV APP_HOME /usr/src/app
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
-EXPOSE 3000
+EXPOSE 3001
 
 # Because of backport error, see https://superuser.com/questions/1423486/issue-with-fetching-http-deb-debian-org-debian-dists-jessie-updates-inrelease
 RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
