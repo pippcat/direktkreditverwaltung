@@ -1,0 +1,46 @@
+= form_for @association do |f|
+  - if @association.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@association.errors.count, "error")} prohibited this association from being saved:"
+      %ul
+        - @association.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :city
+    = f.text_field :city
+  .field
+    = f.label :street
+    = f.text_field :street
+  .field
+    = f.label :zip_code
+    = f.text_field :zip_code
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :association_board
+    = f.text_field :association_board
+  .field
+    = f.label :county_court
+    = f.text_field :county_court
+  .field
+    = f.label :association_register
+    = f.text_field :association_register
+  .field
+    = f.label :bank_name
+    = f.text_field :bank_name
+  .field
+    = f.label :iban
+    = f.text_field :iban
+  .field
+    = f.label :bic
+    = f.text_field :bic 
+  .field
+    = f.label :web
+    = f.text_field :web
+  .actions
+    = f.submit 'Speichern', class: 'btn btn-default'

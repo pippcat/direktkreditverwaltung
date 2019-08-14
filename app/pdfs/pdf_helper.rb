@@ -3,8 +3,8 @@ module PdfHelper
   include ActionView::Helpers::NumberHelper
 
   private
-  def company
-    @company = Company.find :first
+  def association
+    @association = Association.find :first
   end
 
 end

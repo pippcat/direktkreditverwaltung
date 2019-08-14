@@ -7,7 +7,7 @@ Direktkreditverwaltung::Application.routes.draw do
   resources :mail_templates
 
 
-  resources :companies
+  resources :associations
 
 
   resources :contract_terminators
@@ -25,7 +25,7 @@ Direktkreditverwaltung::Application.routes.draw do
   get "contracts/remaining_term"
 
   resources :accounting_entries
-  
+
   resources :contracts do
     resources :accounting_entries
     resources :contract_versions
@@ -34,7 +34,7 @@ Direktkreditverwaltung::Application.routes.draw do
   resources :contacts do
     resources :contracts do
       resources :accounting_entries
-    end  
+    end
   end
 
   resources :year_end_closings do
@@ -47,5 +47,5 @@ Direktkreditverwaltung::Application.routes.draw do
 
 
   root :to => "home#index"
-  
+
 end

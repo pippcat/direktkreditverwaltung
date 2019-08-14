@@ -20,8 +20,8 @@ gekündigt sind aber wieder YearEndClosing mässig reverted wurden?
 * Authentication&Authorization inklusive Infos wer wann was verändert hat (wichtig falls es mal Probleme gibt) -> papertrail gem
 * Jahresabschluss Übersicht als CSV/PDF runterladbar machen (für Buchhaltung)
 * Mehrere Projekte verwalten können
-** company model dass die Stammdaten hält erstellen
-** alles mit company model scopen (belongs_to :company)
+** association model dass die Stammdaten hält erstellen
+** alles mit association model scopen (belongs_to :association)
 ** User model mit login
 
 # UI

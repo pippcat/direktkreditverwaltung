@@ -1,7 +1,7 @@
 class UserMailer < ActionMailer::Base
 
   def year_closing_statement(email, closing_statements_pdf_files)
-    @company = Company.first
+    @association = Association.first
 
     name = email.contact.email
     name = email.contact.prename if email.contact.prename.present?
@@ -19,8 +19,8 @@ class UserMailer < ActionMailer::Base
     content = email.mail_template.content.gsub(/@geber_in@/, name)
 
     mail(
-      from: @company.email,
-      bcc: @company.email,
+      from: @association.email,
+      bcc: @association.email,
       to: email.contact.email,
       subject: email.mail_template.subject,
       body: content

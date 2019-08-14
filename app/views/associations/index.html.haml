@@ -1,0 +1,40 @@
+%h1 Übersicht Vereine
+
+%table
+  %tr
+    %th Vereinsname
+    %th Stadt
+    %th Straße
+    %th PLZ
+    %th Email
+    %th Vorstand
+    %th Amtsgericht
+    %th Vereinsregister
+    %th Bank
+    %th IBAN
+    %th BIC
+    %th Web
+    %th
+    %th
+
+  - @association.each do |association|
+    %tr
+      %td= association.name
+      %td= association.city
+      %td= association.street
+      %td= association.zip_code
+      %td= association.email
+      %td= association.association_board
+      %td= association.county_court
+      %td= association.association_register
+      %td= association.bank_name
+      %td= association.iban
+      %td= association.bic
+      %td= association.web
+      %td= link_to 'Anzeigen', association
+      %td= link_to 'Editieren', edit_association_path(association)
+      %td= link_to 'Löschen', association, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'Neuen Verein hinzufügen', new_association_path

@@ -35,7 +35,7 @@ class PdfYearClosingStatement < Prawn::Document
 
     move_down 40
 
-    text "#{company.city}, den #{DateTime.now.strftime("%d.%m.%Y")}", align: :right
+    text "#{association.city}, den #{DateTime.now.strftime("%d.%m.%Y")}", align: :right
     move_down 40
     text "Kontostand Nachrangdarlehen Nr. #{@contract.number}", size: 12, style: :bold
     move_down 30
@@ -79,7 +79,7 @@ class PdfYearClosingStatement < Prawn::Document
     text "Vielen Dank!"
     move_down 30
     text "Mit freundlichen Grüßen"
-    text "Das Direktkredit Team der #{company.gmbh_name}"
+    text "Das Direktkredit Team der #{association.association_name}"
     move_down 30
 
     footer
@@ -99,28 +99,28 @@ class PdfYearClosingStatement < Prawn::Document
 
     bounding_box [x_pos + 55, y_pos - image_heigth],
                  width: image_width do
-      text company.name, size: 10
+      text association.name, size: 10
       text "Projekt im Mietshäuser Syndikat", size: 8, style: :italic
       move_down 10
-      if company.building_street && company.building_zipcode
-        text company.building_street, size: 8
-        text "#{company.building_zipcode} #{company.city}", size: 8
+      if association.building_street && association.building_zipcode
+        text association.building_street, size: 8
+        text "#{association.building_zipcode} #{association.city}", size: 8
       else
-        text company.street, size: 8
-        text "#{company.zip_code} #{company.city}", size: 8
+        text association.street, size: 8
+        text "#{association.zip_code} #{association.city}", size: 8
       end
 
       move_down 10
-      text company.email, size: 8
+      text association.email, size: 8
       #text "post@kuneterakete.de", size: 8
-      text company.web, size: 8
+      text association.web, size: 8
     end
 
     bounding_box [0, y_pos - address_y_pos],
                  width: image_width do
       fill_color '777777'
-      text "#{company.gmbh_name}     #{company.street}     #{company.zip_code} #{company.city}", size: 7
-      #text "kunet e.V.     #{company.street}     #{company.zip_code} #{company.city}", size: 7
+      text "#{association.association_name}     #{association.street}     #{association.zip_code} #{association.city}", size: 7
+      #text "kunet e.V.     #{association.street}     #{association.zip_code} #{association.city}", size: 7
       fill_color '000000'
       move_down 10
       text "#{@contract.contact.try(:prename)} #{@contract.contact.try(:name)}"
@@ -187,16 +187,16 @@ class PdfYearClosingStatement < Prawn::Document
     fill_color '777777'
     y_pos -= 5
     bounding_box [20, y_pos], width: bounds.width/3.0 do
-      text company.bank_name, size: 8
-      text company.bank_account_info, size: 8
+      text association.bank_name, size: 8
+      text association.iban, size: 8
     end
     bounding_box [20 + bounds.width/3.0, y_pos], width: bounds.width/3.0 do
       text "Geschäftsführung", size: 8
-      text company.gmbh_executive_board, size: 8
+      text association.association_board, size: 8
     end
     bounding_box [20 + 2*bounds.width/3.0, y_pos], width: bounds.width/3.0 do
-      text "Registergericht: #{company.gmbh_register_number}", size: 8
-      text "Steuernummer: #{company.gmbh_tax_number}", size: 8
+      text "Registergericht: #{association.county_court}", size: 8
+      text "Steuernummer: #{association.association_register}", size: 8
     end
   end
 

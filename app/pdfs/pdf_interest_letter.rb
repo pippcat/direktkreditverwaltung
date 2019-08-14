@@ -29,20 +29,20 @@ class PdfInterestLetter < Prawn::Document
 
       bounding_box [x_pos + 55, y_pos - IMAGE_HEIGHT], 
                    width: IMAGE_WITH do
-        text company.name, size: 10
+        text association.name, size: 10
         text "Projekt im Mietshäuser Syndikat", size: 8, style: :italic
         move_down 10
-        text company.street, size: 8
-        text "#{company.zip_code} #{company.city}", size: 8
+        text association.street, size: 8
+        text "#{association.zip_code} #{association.city}", size: 8
         move_down 10
-        text company.email, size: 8
-        text company.web, size: 8
+        text association.email, size: 8
+        text association.web, size: 8
       end
 
       bounding_box [0, y_pos - ADDRESS_Y_POS], 
                    width: IMAGE_WITH do
         fill_color '777777'
-        text "#{company.gmbh_name}     #{company.street}     #{company.zip_code} #{company.city}", size: 7
+        text "#{association.association_name}     #{association.street}     #{association.zip_code} #{association.city}", size: 7
         fill_color '000000'
         move_down 10
         text "#{contract.contact.try(:prename)} #{contract.contact.try(:name)}"
@@ -59,7 +59,7 @@ class PdfInterestLetter < Prawn::Document
 
       move_down 40
 
-      text "#{company.city}, den #{DateTime.now.strftime("%d.%m.%Y")}", align: :right
+      text "#{association.city}, den #{DateTime.now.strftime("%d.%m.%Y")}", align: :right
       move_down 40
       text "Kontostand Direktkreditvertrag Nr. #{contract.number}", size: 12, style: :bold
       move_down 30
@@ -106,7 +106,7 @@ class PdfInterestLetter < Prawn::Document
       text "Mit freundlichen Grüßen"
       move_down 30
       text texts['your_name']
-      text "für die #{texts['gmbh_name']}"
+      text "für die #{texts['association_name']}"
       move_down 30
 
       #footer
@@ -116,16 +116,16 @@ class PdfInterestLetter < Prawn::Document
       fill_color '777777'
       y_pos -= 5
       bounding_box [20, y_pos], width: bounds.width/3.0 do
-        text company.bank_name, size: 8
-        text company.bank_account_info, size: 8
+        text association.bank_name, size: 8
+        text association.iban, size: 8
       end
       bounding_box [20 + bounds.width/3.0, y_pos], width: bounds.width/3.0 do
         text "Geschäftsführung", size: 8
-        text company.gmbh_executive_board, size: 8
+        text association.association_board, size: 8
       end
       bounding_box [20 + 2*bounds.width/3.0, y_pos], width: bounds.width/3.0 do
-        text "Registergericht: #{company.gmbh_register_number}", size: 8
-        text "Steuernummer: #{company.gmbh_tax_number}", size: 8
+        text "Registergericht: #{association.county_court}", size: 8
+        text "Steuernummer: #{association.association_register}", size: 8
       end
  
     end

@@ -1,0 +1,39 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @association.name
+%p
+  %b Stadt:
+  = @association.city
+%p
+  %b Straße:
+  = @association.street
+%p
+  %b PLZ:
+  = @association.zip_code
+%p
+  %b Email:
+  = @association.email
+%p
+  %b Vorstand:
+  = @association.association_board
+%p
+  %b Amtsgericht:
+  = @association.county_court
+%p
+  %b Vereinsregister:
+  = @association.association_register
+%p
+  %b Bank:
+  = @association.bank_name
+%p
+  %b BIC:
+  = @association.bic
+%p
+  %b Web:
+  = @association.web
+
+= link_to 'Editieren', edit_association_path(@association)
+\|
+= link_to 'Übersicht Vereine', associations_path

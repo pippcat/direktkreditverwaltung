@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'bootstrap-sass', '=3.0.3.0' # newer versions incompatible to rails 3.2
 gem 'haml-rails'
 gem 'sass-rails'
+gem 'sass', '=3.2.13' # due to cache bug
 gem 'prawn'
 gem 'prawn-table'
 
@@ -46,5 +47,3 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
-

@@ -10,23 +10,23 @@ class PdfYearClosingStatement < Prawn::Document
 
     font 'Helvetica'
 
-    gmbh_adress = "#{company.gmbh_name}     #{company.street}     #{company.zip_code} #{company.city}"
-    gmbh_mail = company.email
-    gmbh_greet = "Die Finanz-Crew der #{company.gmbh_name}"
-    kunet_adress = "#{company.verein_name}     #{company.street}     #{company.zip_code} #{company.city}"
+    gmbh_adress = "#{association.association_name}     #{association.street}     #{association.zip_code} #{association.city}"
+    gmbh_mail = association.email
+    gmbh_greet = "Die Finanz-Crew der #{association.association_name}"
+    kunet_adress = "#{association.verein_name}     #{association.street}     #{association.zip_code} #{association.city}"
     kunet_mail = "post@kuneterakete.de"
-    kunet_greet = "Die Finanz-Crew des #{company.verein_name}"
+    kunet_greet = "Die Finanz-Crew des #{association.verein_name}"
 
     is_kunet_contract = @contract.number.index("70") == 0 ? true : false;
-    company_adress = is_kunet_contract ? kunet_adress : gmbh_adress;
-    company_mail = is_kunet_contract ? kunet_mail : gmbh_mail;
+    association_adress = is_kunet_contract ? kunet_adress : gmbh_adress;
+    association_mail = is_kunet_contract ? kunet_mail : gmbh_mail;
     farewell_formula = is_kunet_contract ? kunet_greet : gmbh_greet
 
-    postal_address_and_header(company_adress, company_mail)
+    postal_address_and_header(association_adress, association_mail)
 
     move_down 40
 
-    text "#{company.city}, den #{DateTime.now.strftime("%d.%m.%Y")}", align: :right
+    text "#{association.city}, den #{DateTime.now.strftime("%d.%m.%Y")}", align: :right
     move_down 40
     text "Kontostand Nachrangdarlehen Nr. #{@contract.number}", size: 12, style: :bold
     move_down 30
@@ -60,7 +60,7 @@ class PdfYearClosingStatement < Prawn::Document
     is_kunet_contract ? nil : footer
   end
 
-  def postal_address_and_header company_adress, company_mail
+  def postal_address_and_header association_adress, association_mail
     image_width = 180
     image_heigth = 52
     address_y_pos = 110
@@ -73,26 +73,26 @@ class PdfYearClosingStatement < Prawn::Document
 
     bounding_box [x_pos + 55, y_pos - image_heigth],
                  width: image_width do
-      text company.name, size: 10
+      text association.name, size: 10
       text "Projekt im Mietshäuser Syndikat", size: 8, style: :italic
       move_down 10
-      if company.building_street && company.building_zipcode
-        text company.building_street, size: 8
-        text "#{company.building_zipcode} #{company.city}", size: 8
+      if association.building_street && association.building_zipcode
+        text association.building_street, size: 8
+        text "#{association.building_zipcode} #{association.city}", size: 8
       else
-        text company.street, size: 8
-        text "#{company.zip_code} #{company.city}", size: 8
+        text association.street, size: 8
+        text "#{association.zip_code} #{association.city}", size: 8
       end
 
       move_down 10
-      text company_mail, size: 8 # kunet vs. gmbh
-      text company.web, size: 8
+      text association_mail, size: 8 # kunet vs. gmbh
+      text association.web, size: 8
     end
 
     bounding_box [0, y_pos - address_y_pos],
                  width: image_width do
       fill_color '777777'
-      text company_adress, size: 7 # kunet vs. gmbh
+      text association_adress, size: 7 # kunet vs. gmbh
       fill_color '000000'
       move_down 10
       text "#{@contract.contact.try(:prename)} #{@contract.contact.try(:name)}"
@@ -149,16 +149,16 @@ class PdfYearClosingStatement < Prawn::Document
     fill_color '777777'
     y_pos -= 5
     bounding_box [20, y_pos], width: bounds.width/3.0 do
-      text company.bank_name, size: 8
-      text company.bank_account_info, size: 8
+      text association.bank_name, size: 8
+      text association.iban, size: 8
     end
     bounding_box [20 + bounds.width/3.0, y_pos], width: bounds.width/3.0 do
       text "Geschäftsführung", size: 8
-      text company.gmbh_executive_board, size: 8
+      text association.association_board, size: 8
     end
     bounding_box [20 + 2*bounds.width/3.0, y_pos], width: bounds.width/3.0 do
-      text "Registergericht: #{company.gmbh_register_number}", size: 8
-      text "Steuernummer: #{company.gmbh_tax_number}", size: 8
+      text "Registergericht: #{association.county_court}", size: 8
+      text "Steuernummer: #{association.association_register}", size: 8
     end
   end
 

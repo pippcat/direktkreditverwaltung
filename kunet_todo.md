@@ -1,6 +1,6 @@
 
 
-- Company anlegen
+- Association anlegen
 - Kontakt anlegen
 - Kreditvertrag anlegen
 - Geld buchen

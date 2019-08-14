@@ -25,24 +25,21 @@ ActiveRecord::Schema.define(:version => 20170918092109) do
 
   add_index "accounting_entries", ["contract_id"], :name => "index_accounting_entries_on_contract_id"
 
-  create_table "companies", :force => true do |t|
+  create_table "associations", :force => true do |t|
     t.string   "name"
-    t.string   "gmbh_name"
-    t.string   "verein_name"
+    t.string   "city"
     t.string   "street"
     t.string   "zip_code"
-    t.string   "city"
     t.string   "email"
-    t.string   "web"
+    t.string   "association_board"
+    t.string   "county_court"
+    t.string   "association_register"
     t.string   "bank_name"
-    t.string   "bank_account_info"
-    t.string   "gmbh_executive_board"
-    t.string   "gmbh_register_number"
-    t.string   "gmbh_tax_number"
+    t.string   "iban"
+    t.string   "bic"
+    t.string   "web"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
-    t.string   "building_street"
-    t.string   "building_zipcode"
   end
 
   create_table "contacts", :force => true do |t|

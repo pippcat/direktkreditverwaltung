@@ -35,10 +35,10 @@ class YearEndClosingsController < ApplicationController
 
   def send_test_email
     year = params[:id].to_i
-    Email.send_test_email(year, @company.email)
+    Email.send_test_email(year, @association.email)
 
     redirect_to emails_url(year: year),
-                notice: "Eine Testmail für #{year} wurden an #{@company.email} geschickt."
+                notice: "Eine Testmail für #{year} wurden an #{@association.email} geschickt."
   end
 
   def send_emails
